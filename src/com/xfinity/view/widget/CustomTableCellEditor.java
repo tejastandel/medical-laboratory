@@ -9,10 +9,6 @@ import javax.swing.JTextField;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableModel;
 
-/**
- *
- * @author supun
- */
 public class CustomTableCellEditor extends AbstractCellEditor implements TableCellEditor {
 
         private TableCellEditor editor;

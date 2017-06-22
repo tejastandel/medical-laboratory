@@ -5,8 +5,10 @@
  */
 package com.xfinity.view.panel;
 
+import com.xfinity.controller.DoctorController;
 import com.xfinity.controller.ReportController;
 import com.xfinity.controller.TestController;
+import com.xfinity.data_access_object.Doctor;
 import com.xfinity.data_access_object.Element;
 import com.xfinity.data_access_object.ElementResult;
 import com.xfinity.data_access_object.Report;
@@ -42,20 +44,29 @@ public class AddTestResult extends javax.swing.JPanel {
      */
     public AddTestResult() {
         initComponents();
+        jTable1.removeColumn(jTable1.getColumnModel().getColumn(7));
+        jTable1.removeColumn(jTable1.getColumnModel().getColumn(6));
         jTable1.removeColumn(jTable1.getColumnModel().getColumn(5));
         jTable1.removeColumn(jTable1.getColumnModel().getColumn(4));
         jTable1.setRowHeight((int) (jTable1.getRowHeight() * 1.5));
         jTable1.putClientProperty("terminateEditOnFocusLost", Boolean.TRUE);
-        DefaultComboBoxModel<Test> cmbTestmodel = (DefaultComboBoxModel<Test>) cmbTest.getModel();
-        cmbTestmodel.removeAllElements();
+        DefaultComboBoxModel<Test> cmbTestModel = (DefaultComboBoxModel<Test>) cmbTest.getModel();
+        cmbTestModel.removeAllElements();
         List<Test> availableTests = TestController.getAvailableTests();
         availableTests.stream().forEach((test) -> {
-            cmbTestmodel.addElement(test);
+            cmbTestModel.addElement(test);
+        });
+        
+        DefaultComboBoxModel<Doctor> cmbDocModel = (DefaultComboBoxModel<Doctor>) cmbRefferedBy.getModel();
+        ArrayList<Doctor> doctors = DoctorController.getDoctors();
+        doctors.add(0, new Doctor());
+        doctors.stream().forEach((doc) -> {
+            cmbDocModel.addElement(doc);
         });
         btnGroupAgeSuffix.add(rBtnYears);
         btnGroupAgeSuffix.add(rBtnMonths);
         rBtnYears.setSelected(true);
-
+        
         cmbTitle.setModel(new DefaultComboBoxModel(new Title[]{
             new Title("MR", Gender.MALE),
             new Title("MRS", Gender.FEMALE),
@@ -67,7 +78,7 @@ public class AddTestResult extends javax.swing.JPanel {
             new Title("MASTER", Gender.MALE)
         }));
         cmbGender.setEnabled(false);
-
+        
         jTable1.getColumnModel().getColumn(1).setCellEditor(new CustomTableCellEditor(jTable1.getModel()));
         jTable1.getColumnModel().getColumn(1).setCellRenderer(new CustomCellRenderer());
     }
@@ -100,10 +111,10 @@ public class AddTestResult extends javax.swing.JPanel {
         rBtnMonths = new javax.swing.JRadioButton();
         jLabel5 = new javax.swing.JLabel();
         txtName = new javax.swing.JTextField();
-        txtRefferedBy = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         cmbTest = new javax.swing.JComboBox();
         jLabel8 = new javax.swing.JLabel();
+        cmbRefferedBy = new javax.swing.JComboBox();
         btnReset = new javax.swing.JButton();
         testPerformedDateChooser = new de.wannawork.jcalendar.JCalendarComboBox();
         specimenCollectedDateChooser = new de.wannawork.jcalendar.JCalendarComboBox();
@@ -126,14 +137,14 @@ public class AddTestResult extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Description", "Result", "Units", "Ranges", "ElementId", "ExpectedResults"
+                "Description", "Result", "Units", "Ranges", "ElementId", "ExpectedResults", "Grouping", "FloatingPoints"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Integer.class, java.lang.Object.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Integer.class, java.lang.Object.class, java.lang.Boolean.class, java.lang.Integer.class
             };
             boolean[] canEdit = new boolean [] {
-                false, true, false, false, false, false
+                false, true, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -149,6 +160,8 @@ public class AddTestResult extends javax.swing.JPanel {
         if (jTable1.getColumnModel().getColumnCount() > 0) {
             jTable1.getColumnModel().getColumn(4).setResizable(false);
             jTable1.getColumnModel().getColumn(5).setResizable(false);
+            jTable1.getColumnModel().getColumn(6).setResizable(false);
+            jTable1.getColumnModel().getColumn(7).setResizable(false);
         }
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -195,6 +208,7 @@ public class AddTestResult extends javax.swing.JPanel {
 
         jLabel7.setText("Referred By");
 
+        cmbTest.setModel(new DefaultComboBoxModel<Test>());
         cmbTest.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cmbTestItemStateChanged(evt);
@@ -202,6 +216,8 @@ public class AddTestResult extends javax.swing.JPanel {
         });
 
         jLabel8.setText("Test");
+
+        cmbRefferedBy.setModel(new DefaultComboBoxModel<Doctor>());
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -232,12 +248,12 @@ public class AddTestResult extends javax.swing.JPanel {
                         .addComponent(rBtnMonths))
                     .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtRefferedBy)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbRefferedBy, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cmbTest, 0, 134, Short.MAX_VALUE)
+                    .addComponent(cmbTest, 0, 122, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel8)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -263,8 +279,8 @@ public class AddTestResult extends javax.swing.JPanel {
                     .addComponent(rBtnYears)
                     .addComponent(rBtnMonths)
                     .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtRefferedBy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmbTest, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbTest, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbRefferedBy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -348,6 +364,10 @@ public class AddTestResult extends javax.swing.JPanel {
         report.setTestName(test.getName());
         report.setTestId(test.getTestId());
         report.setSpeciemen(test.getSpeciemen());
+        String docName;
+        if ((docName = ((Doctor) cmbRefferedBy.getSelectedItem()).getDocName()) != null) {
+            report.setReferredBy(String.format("DR.%S", docName));
+        }
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         report.setTestPerformedDate(simpleDateFormat.format(testPerformedDateChooser.getDate()));
         report.setSpeciemenCollectedDate(simpleDateFormat.format(specimenCollectedDateChooser.getDate()));
@@ -356,9 +376,6 @@ public class AddTestResult extends javax.swing.JPanel {
         }
         report.setFooter(test.getFooter());
         report.setAge(String.format("%s %s", txtAge.getText().trim(), rBtnYears.isSelected() ? "Year(s)" : "Month(s)"));
-        if (!txtRefferedBy.getText().trim().isEmpty()) {
-            report.setReferredBy(String.format("DR.%S", txtRefferedBy.getText()).replaceAll("\t+", " ").replaceAll(" +", " ").trim());
-        }
         report.setGender(cmbGender.getSelectedItem().toString());
         List<ElementResult> results = new ArrayList<>();
         Vector<Vector> dataVector = ((DefaultTableModel) jTable1.getModel()).getDataVector();
@@ -372,9 +389,11 @@ public class AddTestResult extends javax.swing.JPanel {
                 try {
                     NumberFormat formatter = NumberFormat.getInstance();
                     value = formatter.parse(value.toString());
-                    formatter.setGroupingUsed(true);
+                    formatter.setGroupingUsed((boolean) vector.elementAt(6));
                     if (value instanceof Double || value instanceof Float) {
-                        formatter.setMinimumFractionDigits(2);
+                        int floatingPoints = (int) vector.elementAt(7);
+                        formatter.setMinimumFractionDigits(floatingPoints);
+                        formatter.setMaximumFractionDigits(floatingPoints);
                     }
                     value = formatter.format(value);
                 } catch (ParseException ex) {
@@ -385,7 +404,6 @@ public class AddTestResult extends javax.swing.JPanel {
             result.setUnit((temp = vector.elementAt(2)) != null ? temp.toString() : null);
             result.setRange((temp = vector.elementAt(3)) != null ? temp.toString() : null);
             result.setElementId((int) vector.elementAt(4));
-            System.out.println(result);
         }
         report.setResults(results);
         if (ReportController.saveReport(report)) {
@@ -405,18 +423,20 @@ public class AddTestResult extends javax.swing.JPanel {
             model.setRowCount(0);
             for (Element element : selectedTest.getElements()) {
                 Object expectedResults = element.getResults();
-
+                
                 if (expectedResults != null && expectedResults.toString().contains("|")) {
                     expectedResults = expectedResults.toString().trim().split("[|]");
                 }
-
+                
                 model.addRow(new Object[]{
                     element.getName(),
                     (expectedResults instanceof String[]) ? (((String[]) expectedResults)[0]) : expectedResults,
                     element.getUnit(),
                     element.getRange(),
                     element.getElementId(),
-                    expectedResults
+                    expectedResults,
+                    element.isGrouping(),
+                    element.getFloatingPoints()
                 });
             }
         }
@@ -447,6 +467,7 @@ public class AddTestResult extends javax.swing.JPanel {
     private javax.swing.JButton btnReset;
     private javax.swing.JButton btnSave;
     private javax.swing.JComboBox cmbGender;
+    private javax.swing.JComboBox cmbRefferedBy;
     private javax.swing.JComboBox cmbTest;
     private javax.swing.JComboBox cmbTitle;
     private org.jdatepicker.util.JDatePickerUtil jDatePickerUtil1;
@@ -472,6 +493,5 @@ public class AddTestResult extends javax.swing.JPanel {
     private javax.swing.JFormattedTextField txtAge;
     private javax.swing.JTextField txtComment;
     private javax.swing.JTextField txtName;
-    private javax.swing.JTextField txtRefferedBy;
     // End of variables declaration//GEN-END:variables
 }

@@ -87,8 +87,7 @@ CREATE TABLE `view_report_result` (
 	`unit` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
 	`range` VARCHAR(50) NOT NULL COLLATE 'utf8_general_ci',
 	`result` VARCHAR(50) NOT NULL COLLATE 'utf8_general_ci'
-) ENGINE=MyISAM;
-
+) ENGINE=InnoDB;
 
 -- Dumping structure for view medilab.view_report_result
 DROP VIEW IF EXISTS `view_report_result`;
@@ -98,3 +97,18 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` VIEW `view_report_result` 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+
+ALTER TABLE `medilab`.`tbl_test_element` 
+ADD COLUMN `grouping` ENUM('true', 'false') NULL DEFAULT 'true' AFTER `results`,
+ADD COLUMN `floatingPoints` INT(11) NULL DEFAULT 0 AFTER `grouping`;
+
+DROP TABLE IF EXISTS `tbl_doctor`;
+CREATE TABLE IF NOT EXISTS `tbl_doctor` (
+  `docId` int(11) NOT NULL,
+  `docName` varchar(100) NOT NULL,
+  PRIMARY KEY (`docId`),
+  UNIQUE KEY `docName` (`docName`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE `medilab`.`tbl_doctor` 
+CHANGE COLUMN `docId` `docId` INT(11) NOT NULL AUTO_INCREMENT ;

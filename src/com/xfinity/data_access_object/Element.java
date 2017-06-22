@@ -7,6 +7,8 @@ public class Element {
     private String range;
     private String results;
     private int elementId;
+    private boolean grouping;
+    private int floatingPoints;
 
     public String getName() {
 	return name;
@@ -51,5 +53,21 @@ public class Element {
 
     public void setElementId(int elementId) {
 	this.elementId = elementId;
+    }
+
+    public boolean isGrouping() {
+        return grouping;
+    }
+
+    public void setGrouping(boolean grouping) {
+        this.grouping = grouping;
+    }
+
+    public int getFloatingPoints() {
+        return floatingPoints;
+    }
+
+    public void setFloatingPoints(int floatingPoints) {
+        this.floatingPoints = floatingPoints;
     }
 }

@@ -6,11 +6,7 @@ import java.util.List;
 
 public class TestController {
 
-    private static final TestDataAccessLayer TEST_DAL;
-
-    static {
-	TEST_DAL = new TestDataAccessLayer();
-    }
+    private static final TestDataAccessLayer TEST_DAL = new TestDataAccessLayer();
 
     public static boolean addTest(Test test) {
 	return TEST_DAL.addTest(test);
