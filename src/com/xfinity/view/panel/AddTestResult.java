@@ -56,7 +56,7 @@ public class AddTestResult extends javax.swing.JPanel {
         availableTests.stream().forEach((test) -> {
             cmbTestModel.addElement(test);
         });
-        
+
         DefaultComboBoxModel<Doctor> cmbDocModel = (DefaultComboBoxModel<Doctor>) cmbRefferedBy.getModel();
         ArrayList<Doctor> doctors = DoctorController.getDoctors();
         doctors.add(0, new Doctor());
@@ -66,7 +66,7 @@ public class AddTestResult extends javax.swing.JPanel {
         btnGroupAgeSuffix.add(rBtnYears);
         btnGroupAgeSuffix.add(rBtnMonths);
         rBtnYears.setSelected(true);
-        
+
         cmbTitle.setModel(new DefaultComboBoxModel(new Title[]{
             new Title("MR", Gender.MALE),
             new Title("MRS", Gender.FEMALE),
@@ -78,7 +78,7 @@ public class AddTestResult extends javax.swing.JPanel {
             new Title("MASTER", Gender.MALE)
         }));
         cmbGender.setEnabled(false);
-        
+
         jTable1.getColumnModel().getColumn(1).setCellEditor(new CustomTableCellEditor(jTable1.getModel()));
         jTable1.getColumnModel().getColumn(1).setCellRenderer(new CustomCellRenderer());
     }
@@ -390,14 +390,12 @@ public class AddTestResult extends javax.swing.JPanel {
                     NumberFormat formatter = NumberFormat.getInstance();
                     value = formatter.parse(value.toString());
                     formatter.setGroupingUsed((boolean) vector.elementAt(6));
-                    if (value instanceof Double || value instanceof Float) {
-                        int floatingPoints = (int) vector.elementAt(7);
-                        formatter.setMinimumFractionDigits(floatingPoints);
-                        formatter.setMaximumFractionDigits(floatingPoints);
-                    }
+                    int floatingPoints = (int) vector.elementAt(7);
+                    formatter.setMinimumFractionDigits(floatingPoints);
+                    formatter.setMaximumFractionDigits(floatingPoints);
                     value = formatter.format(value);
                 } catch (ParseException ex) {
-                    //Exception handeled
+                    System.out.println(ex.getCause());
                 }
             }
             result.setResult(value.toString());
@@ -423,11 +421,11 @@ public class AddTestResult extends javax.swing.JPanel {
             model.setRowCount(0);
             for (Element element : selectedTest.getElements()) {
                 Object expectedResults = element.getResults();
-                
+
                 if (expectedResults != null && expectedResults.toString().contains("|")) {
                     expectedResults = expectedResults.toString().trim().split("[|]");
                 }
-                
+
                 model.addRow(new Object[]{
                     element.getName(),
                     (expectedResults instanceof String[]) ? (((String[]) expectedResults)[0]) : expectedResults,
