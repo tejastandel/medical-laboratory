@@ -332,8 +332,8 @@ public class PrintReceipt extends javax.swing.JPanel {
         ReceiptTest result;
         for (Vector vector : dataVector) {
             results.add(result = new ReceiptTest());
-            result.setTestName(vector.elementAt(0).toString());            
-            result.setAmount(Double.parseDouble(vector.elementAt(1).toString()));            
+            result.setTestName(vector.elementAt(0).toString());
+            result.setAmount(Double.parseDouble(vector.elementAt(1).toString()));
             result.setDiscount(Double.parseDouble(vector.elementAt(2).toString()));
             result.setQty(Integer.parseInt(vector.elementAt(3).toString()));
         }
@@ -374,7 +374,6 @@ public class PrintReceipt extends javax.swing.JPanel {
             model.removeRow(index);
         }
     }//GEN-LAST:event_btnRemoveTestActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddTest;

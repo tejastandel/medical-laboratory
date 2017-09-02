@@ -1,7 +1,7 @@
 package com.xfinity.data_access_object;
 
 public class Doctor {
-    
+
     private int docId;
     private String docName;
 
@@ -35,8 +35,7 @@ public class Doctor {
 
     @Override
     public String toString() {
-        return docName == null ? "": docName;
+        return docName == null ? "" : docName;
     }
-    
-    
+
 }

@@ -1,6 +1,7 @@
 package com.xfinity.data_access_object;
 
 public class ReceiptTest {
+
     private String testName;
     private double discount;
     private double amount;

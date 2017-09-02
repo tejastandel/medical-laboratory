@@ -9,10 +9,10 @@ public class TestController {
     private static final TestDataAccessLayer TEST_DAL = new TestDataAccessLayer();
 
     public static boolean addTest(Test test) {
-	return TEST_DAL.addTest(test);
+        return TEST_DAL.addTest(test);
     }
 
     public static List<Test> getAvailableTests() {
-	return TEST_DAL.getAvailableTests();
+        return TEST_DAL.getAvailableTests();
     }
 }

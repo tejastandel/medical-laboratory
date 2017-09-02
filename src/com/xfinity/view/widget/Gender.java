@@ -11,11 +11,11 @@ package com.xfinity.view.widget;
  */
 public enum Gender {
 
-        MALE(0), FEMALE(1), UNKNOWN(-1);
+    MALE(0), FEMALE(1), UNKNOWN(-1);
 
-        public final int VALUE;
+    public final int VALUE;
 
-        private Gender(int value) {
-            this.VALUE = value;
-        }
+    private Gender(int value) {
+        this.VALUE = value;
+    }
 }

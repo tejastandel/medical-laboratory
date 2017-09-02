@@ -14,33 +14,33 @@ public class DoctorDataAccessLayer {
 
     public boolean addDoctor(Doctor doc) {
         try (Connection connection = DbConnectionProvider.getDbConnection()) {
-	    String sql = "insert into tbl_doctor(docName) values (?)";
+            String sql = "insert into tbl_doctor(docName) values (?)";
             int response = DBHandler.setData(connection, sql, doc.getDocName());
             return response > 0;
-	} catch (SQLException | ClassNotFoundException ex) {
-	    Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
             return false;
-	}
+        }
     }
 
     public ArrayList<Doctor> getDoctors() {
         ArrayList<Doctor> availableDoctors = new ArrayList<>();
-	try (Connection connection = DbConnectionProvider.getDbConnection()) {
-	    String sql = "SELECT docName FROM tbl_doctor order by docName asc";
-	    ResultSet docData = DBHandler.getData(connection, sql);
-	    if (docData.first()) {
-		int indexDoctorName = docData.findColumn("docName");
-		Doctor doc;
-		do {
-		    doc = new Doctor();
+        try (Connection connection = DbConnectionProvider.getDbConnection()) {
+            String sql = "SELECT docName FROM tbl_doctor order by docName asc";
+            ResultSet docData = DBHandler.getData(connection, sql);
+            if (docData.first()) {
+                int indexDoctorName = docData.findColumn("docName");
+                Doctor doc;
+                do {
+                    doc = new Doctor();
                     doc.setDocName(docData.getString(indexDoctorName));
                     availableDoctors.add(doc);
-		} while (docData.next());
-	    }
-	} catch (SQLException | ClassNotFoundException ex) {
-	    Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
-	}
-	return availableDoctors;
+                } while (docData.next());
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            Logger.getLogger(this.getClass().getName()).log(Level.SEVERE, null, ex);
+        }
+        return availableDoctors;
     }
-    
+
 }

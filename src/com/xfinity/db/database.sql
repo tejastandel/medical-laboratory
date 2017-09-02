@@ -16,6 +16,17 @@ CREATE DATABASE IF NOT EXISTS `medilab` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `medilab`;
 
 
+-- Dumping structure for table medilab.tbl_test
+DROP TABLE IF EXISTS `tbl_test`;
+CREATE TABLE IF NOT EXISTS `tbl_test` (
+  `testId` int(11) NOT NULL,
+  `testName` varchar(100) NOT NULL,
+  `footer` varchar(1000) NOT NULL,
+  PRIMARY KEY (`testId`),
+  UNIQUE KEY `testName` (`testName`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Data exporting was unselected.
 -- Dumping structure for table medilab.tbl_report_result
 DROP TABLE IF EXISTS `tbl_report_result`;
 CREATE TABLE IF NOT EXISTS `tbl_report_result` (
@@ -25,19 +36,6 @@ CREATE TABLE IF NOT EXISTS `tbl_report_result` (
   PRIMARY KEY (`reportResultId`),
   KEY `FK_report_element` (`elementId`),
   CONSTRAINT `FK_report_element` FOREIGN KEY (`elementId`) REFERENCES `tbl_test_element` (`testElementId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- Data exporting was unselected.
-
-
--- Dumping structure for table medilab.tbl_test
-DROP TABLE IF EXISTS `tbl_test`;
-CREATE TABLE IF NOT EXISTS `tbl_test` (
-  `testId` int(11) NOT NULL,
-  `testName` varchar(100) NOT NULL,
-  `footer` varchar(1000) NOT NULL,
-  PRIMARY KEY (`testId`),
-  UNIQUE KEY `testName` (`testName`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Data exporting was unselected.
@@ -112,3 +110,22 @@ CREATE TABLE IF NOT EXISTS `tbl_doctor` (
 
 ALTER TABLE `medilab`.`tbl_doctor` 
 CHANGE COLUMN `docId` INT(11) NOT NULL AUTO_INCREMENT ;
+
+--new quaries
+alter table medilab.tbl_test_report add column comment varchar(100) default NULL;
+alter table medilab.tbl_test_report add column price decimal(10,2) default 0 not null;
+update tbl_test_report ttr inner join tbl_test tt on tt.testId=ttr.testId set ttr.price = tt.price;
+
+create procedure sp_get_reports(startDate date, endDate date, referredBy varchar(50), patientName varchar(50))
+BEGIN
+	select
+		ttr.patientName, ttr.date, ttr.referredBy, ttr.gender, ttr.age, ttr.reportId, tt.testName, tt.speciemen, tt.footer, tt.testId, ttr.comment
+	from 
+		medilab.tbl_test_report as ttr 
+		inner join medilab.tbl_test as tt 
+			on tt.testId=ttr.testId
+			and ttr.date between startDate and endDate
+			and (ifnull(referredBy, true) or ttr.referredBy=referredBy)
+			and (ifnull(patientName, true) or ttr.patientName like patientName)
+	order by ttr.reportId;
+END 

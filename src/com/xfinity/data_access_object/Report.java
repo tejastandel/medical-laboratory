@@ -21,107 +21,107 @@ public class Report {
     private String comment;
 
     public String getPatientName() {
-	return patientName;
+        return patientName;
     }
 
     public void setPatientName(String patientName) {
-	this.patientName = patientName;
+        this.patientName = patientName;
     }
 
     public String getTestName() {
-	return testName;
+        return testName;
     }
 
     public void setTestName(String testName) {
-	this.testName = testName;
+        this.testName = testName;
     }
 
     public String getAge() {
-	return age;
+        return age;
     }
 
     public void setAge(String age) {
-	this.age = age;
+        this.age = age;
     }
 
     public String getReferredBy() {
-	return referredBy;
+        return referredBy;
     }
 
     public void setReferredBy(String referredBy) {
-	this.referredBy = referredBy;
+        this.referredBy = referredBy;
     }
 
     public String getGender() {
-	return gender;
+        return gender;
     }
 
     public void setGender(String gender) {
-	this.gender = gender;
+        this.gender = gender;
     }
 
     public String getSpeciemen() {
-	return speciemen;
+        return speciemen;
     }
 
     public void setSpeciemen(String speciemen) {
-	this.speciemen = speciemen;
+        this.speciemen = speciemen;
     }
 
     public String getFooter() {
-	return footer;
+        return footer;
     }
 
     public void setFooter(String footer) {
-	this.footer = footer;
+        this.footer = footer;
     }
 
     public String getTestPerformedDate() {
-	return testPerformedDate;
+        return testPerformedDate;
     }
 
     public void setTestPerformedDate(String testPerformedDate) {
-	this.testPerformedDate = testPerformedDate;
+        this.testPerformedDate = testPerformedDate;
     }
 
     public List<ElementResult> getResults() {
-	return results;
+        return results;
     }
 
     public void setResults(List<ElementResult> results) {
-	this.results.clear();
-	this.results.addAll(results);
+        this.results.clear();
+        this.results.addAll(results);
     }
 
     public int getTestId() {
-	return testId;
+        return testId;
     }
 
     public void setTestId(int testId) {
-	this.testId = testId;
+        this.testId = testId;
     }
 
     public int getReportId() {
-	return reportId;
+        return reportId;
     }
 
     public void setReportId(int reportId) {
-	this.reportId = reportId;
+        this.reportId = reportId;
     }
 
     public String getSpeciemenCollectedDate() {
-	return speciemenCollectedDate;
+        return speciemenCollectedDate;
     }
 
     public void setSpeciemenCollectedDate(String speciemenCollectedDate) {
-	this.speciemenCollectedDate = speciemenCollectedDate;
+        this.speciemenCollectedDate = speciemenCollectedDate;
     }
 
     public void setComment(String comment) {
-	this.comment = comment;
+        this.comment = comment;
     }
 
     public String getComment() {
-	return comment;
+        return comment;
     }
 }

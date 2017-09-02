@@ -111,7 +111,7 @@ public class AddDoctor extends javax.swing.JPanel {
     private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
         Doctor doc = new Doctor();
         doc.setDocName(txtDoctorName.getText());
-        if(doc.getDocName() == null || doc.getDocName().trim().isEmpty()){
+        if (doc.getDocName() == null || doc.getDocName().trim().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Please specify a name", null, JOptionPane.INFORMATION_MESSAGE);
             return;
         }
@@ -122,7 +122,6 @@ public class AddDoctor extends javax.swing.JPanel {
             txtDoctorName.setText(null);
         }
     }//GEN-LAST:event_btnOkActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnOk;

@@ -11,16 +11,16 @@ package com.xfinity.view.widget;
  */
 public class Title {
 
-        public String title;
-        public Gender gender;
+    public String title;
+    public Gender gender;
 
-        public Title(String title, Gender gender) {
-            this.title = title;
-            this.gender = gender;
-        }
+    public Title(String title, Gender gender) {
+        this.title = title;
+        this.gender = gender;
+    }
 
-        @Override
-        public String toString() {
-            return title;
-        }
+    @Override
+    public String toString() {
+        return title;
+    }
 }

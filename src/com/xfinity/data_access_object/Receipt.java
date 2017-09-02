@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Receipt {
-    
+
     private String patientName;
     private String age;
     private String gender;
@@ -46,7 +46,7 @@ public class Receipt {
     public List<ReceiptTest> getReceiptTests() {
         return receiptTests;
     }
-    
+
     public void setReceiptTests(List<ReceiptTest> receiptTests) {
         this.receiptTests.clear();
         this.receiptTests.addAll(receiptTests);

@@ -13,49 +13,49 @@ public class Test {
     private double price;
 
     public String getName() {
-	return name;
+        return name;
     }
 
     public void setName(String name) {
-	this.name = name;
+        this.name = name;
     }
 
     public String getSpeciemen() {
-	return speciemen;
+        return speciemen;
     }
 
     public void setSpeciemen(String speciemen) {
-	this.speciemen = speciemen;
+        this.speciemen = speciemen;
     }
 
     public String getFooter() {
-	return footer;
+        return footer;
     }
 
     public void setFooter(String footer) {
-	this.footer = footer;
+        this.footer = footer;
     }
 
     @Override
     public String toString() {
-	return name;
+        return name;
     }
 
     public void setElements(List<Element> elements) {
-	this.elements.clear();
-	this.elements.addAll(elements);
+        this.elements.clear();
+        this.elements.addAll(elements);
     }
 
     public List<Element> getElements() {
-	return this.elements;
+        return this.elements;
     }
 
     public int getTestId() {
-	return testId;
+        return testId;
     }
 
     public void setTestId(int testId) {
-	this.testId = testId;
+        this.testId = testId;
     }
 
     public double getPrice() {

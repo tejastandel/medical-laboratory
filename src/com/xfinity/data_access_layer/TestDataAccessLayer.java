@@ -74,7 +74,7 @@ public class TestDataAccessLayer {
                 int testId = DBHandler.setData(connection, insertTestSql, test.getName(), test.getSpeciemen(), test.getFooter(), "Y");
                 String insertTestDetailsSql = "insert into tbl_test_element (testId, testElementName, unit, `range`, results, grouping, floatingPoints) values (?,?,?,?,?,?,?)";
                 for (Element element : test.getElements()) {
-                    DBHandler.setData(connection, insertTestDetailsSql, testId, element.getName(), element.getUnit(), element.getRange(), element.getResults(), element.isGrouping(), element.getFloatingPoints());
+                    DBHandler.setData(connection, insertTestDetailsSql, testId, element.getName(), element.getUnit(), element.getRange(), element.getResults(), "false", element.getFloatingPoints());
                 }
                 connection.commit();
                 return testId > 0;

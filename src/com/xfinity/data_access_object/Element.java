@@ -11,48 +11,48 @@ public class Element {
     private int floatingPoints;
 
     public String getName() {
-	return name;
+        return name;
     }
 
     public void setName(String name) {
-	this.name = name;
+        this.name = name;
     }
 
     public String getUnit() {
-	return unit;
+        return unit;
     }
 
     public void setUnit(String unit) {
-	this.unit = unit;
+        this.unit = unit;
     }
 
     public String getRange() {
-	return range;
+        return range;
     }
 
     public void setRange(String range) {
-	this.range = range;
+        this.range = range;
     }
 
     public String getResults() {
-	return results;
+        return results;
     }
 
     public void setResults(String results) {
-	this.results = results;
+        this.results = results;
     }
 
     @Override
     public String toString() {
-	return name;
+        return name;
     }
 
     public int getElementId() {
-	return elementId;
+        return elementId;
     }
 
     public void setElementId(int elementId) {
-	this.elementId = elementId;
+        this.elementId = elementId;
     }
 
     public boolean isGrouping() {
