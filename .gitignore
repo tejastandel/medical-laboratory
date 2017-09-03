@@ -1,3 +1,4 @@
 /release/
 /build/
 /reports/*.rpt
+/target/
