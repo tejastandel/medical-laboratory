@@ -1,5 +1,6 @@
 package com.xfinity.view;
 
+import com.seaglasslookandfeel.SeaGlassLookAndFeel;
 import com.xfinity.view.panel.AddDoctor;
 import com.xfinity.view.panel.AddNewTest;
 import com.xfinity.view.panel.AddTestResult;
@@ -166,16 +167,10 @@ public class Window extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         try {
-            javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
+            javax.swing.UIManager.setLookAndFeel(new SeaGlassLookAndFeel());
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Window.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            Logger.getLogger(Window.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } 
         //</editor-fold>
 
         /* Create and display the form */

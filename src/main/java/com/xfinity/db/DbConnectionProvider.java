@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class DbConnectionProvider {
+public class DbConnectionProvider {//2.707949508
 
     public static Connection getDbConnection() throws SQLException, ClassNotFoundException {
         Class.forName("org.mariadb.jdbc.Driver");

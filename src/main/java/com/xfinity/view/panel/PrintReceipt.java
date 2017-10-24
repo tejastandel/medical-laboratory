@@ -14,6 +14,7 @@ import com.xfinity.view.widget.Gender;
 import com.xfinity.view.widget.Title;
 import java.awt.event.ItemEvent;
 import java.io.FileNotFoundException;
+import java.net.URISyntaxException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -363,7 +364,7 @@ public class PrintReceipt extends javax.swing.JPanel {
 
     private void btnAddTestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddTestActionPerformed
         Test test = (Test) cmbTest.getSelectedItem();
-        model.addRow(new Object[]{test.getName(), test.getPrice(), 0d, 0});
+        model.addRow(new Object[]{test.getName(), test.getPrice(), 0d, 1});
     }//GEN-LAST:event_btnAddTestActionPerformed
 
     private void btnRemoveTestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveTestActionPerformed

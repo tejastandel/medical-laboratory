@@ -46,8 +46,8 @@ public class PrintManager {
         parameters.put("speciemenNo", String.format("R%d%s", report.getReportId(), formatter.format(parser.parse(report.getTestPerformedDate()))));
         parameters.put("testName", report.getTestName());
 
-        File unCompiled = new File("reports/report.jrxml");
-        File compiled = new File("reports/report-template.rpt");
+        File unCompiled = new File("./reports/report.jrxml");
+        File compiled = new File("./reports/report-template.rpt");
         //Compile report file if not exists or modified
         if (unCompiled.exists() && (!compiled.exists() || (compiled.lastModified() < unCompiled.lastModified()))) {
             JasperCompileManager.compileReportToStream(new FileInputStream(unCompiled), new FileOutputStream(compiled));
@@ -81,8 +81,8 @@ public class PrintManager {
         parameters.put("gender", receipt.getGender());
         parameters.put("patientName", receipt.getPatientName());
 
-        File unCompiled = new File("reports/receipt.jrxml");
-        File compiled = new File("reports/receipt-template.rpt");
+        File unCompiled = new File("./reports/receipt.jrxml");
+        File compiled = new File("./reports/receipt-template.rpt");
         //Compile report file if not exists or modified
         if (unCompiled.exists() && (!compiled.exists() || (compiled.lastModified() < unCompiled.lastModified()))) {
             JasperCompileManager.compileReportToStream(new FileInputStream(unCompiled), new FileOutputStream(compiled));
@@ -109,15 +109,15 @@ public class PrintManager {
         JasperViewer.viewReport(filledReport, false);
         //JasperPrintManager.printReport(filledReport, true);
     }
-    
+
     public static void printHistory(ArrayList<DoctorReferral> refferals, String fromDate, String toDate, String doctorName) throws JRException, FileNotFoundException, ParseException {
         HashMap<String, Object> parameters = new HashMap<>();
         parameters.put("doctorName", doctorName);
         parameters.put("fromDate", fromDate);
         parameters.put("toDate", toDate);
 
-        File unCompiled = new File("reports/doc_referrals.jrxml");
-        File compiled = new File("reports/doc_referrals.rpt");
+        File unCompiled = new File("./reports/doc_referrals.jrxml");
+        File compiled = new File("./reports/doc_referrals.rpt");
         //Compile report file if not exists or modified
         if (unCompiled.exists() && (!compiled.exists() || (compiled.lastModified() < unCompiled.lastModified()))) {
             JasperCompileManager.compileReportToStream(new FileInputStream(unCompiled), new FileOutputStream(compiled));

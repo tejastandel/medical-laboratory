@@ -6,6 +6,7 @@ import com.xfinity.data_access_object.Doctor;
 import com.xfinity.data_access_object.Report;
 import com.xfinity.util.PrintManager;
 import java.io.FileNotFoundException;
+import java.net.URISyntaxException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;

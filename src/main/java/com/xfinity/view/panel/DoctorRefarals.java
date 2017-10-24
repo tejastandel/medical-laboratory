@@ -11,6 +11,7 @@ import com.xfinity.data_access_object.Doctor;
 import com.xfinity.data_access_object.DoctorReferral;
 import com.xfinity.util.PrintManager;
 import java.io.FileNotFoundException;
+import java.net.URISyntaxException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
