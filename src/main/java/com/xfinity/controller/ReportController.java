@@ -8,8 +8,6 @@ package com.xfinity.controller;
 import com.xfinity.data_access_layer.ReportDataAccessLayer;
 import com.xfinity.data_access_object.DoctorReferral;
 import com.xfinity.data_access_object.Report;
-import java.util.ArrayList;
-import java.util.Date;
 
 /**
  *
