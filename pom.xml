@@ -101,18 +101,25 @@
                 <version>3.0.2</version>
                 <executions>
                     <execution>
-                        <id>copy-resources</id>
+                        <id>copy-reports</id>
                         <phase>validate</phase>
                         <goals>
                             <goal>copy-resources</goal>
                         </goals>
                         <configuration>
-                            <outputDirectory>${basedir}/release/reports</outputDirectory>
+                            <outputDirectory>${basedir}/release</outputDirectory>
                             <resources>          
                                 <resource>
+                                    <targetPath>${basedir}/release/reports</targetPath>
                                     <directory>reports</directory>
                                     <includes>
                                         <include>*.jrxml</include>
+                                    </includes>
+                                </resource>
+                                <resource>
+                                    <directory>${basedir}</directory>
+                                    <includes>
+                                        <include>application-properties.conf</include>
                                     </includes>
                                 </resource>
                             </resources>              
