@@ -1,4 +1,4 @@
-.build
-.output
-.reports/*.rpt
-.gradle
+build/
+output/
+reports/*.rpt
+.gradle/
