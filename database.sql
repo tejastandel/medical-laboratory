@@ -104,7 +104,7 @@ CREATE TABLE IF NOT EXISTS `tbl_doctor` (
 ALTER TABLE `medilab`.`tbl_doctor` 
 CHANGE COLUMN `docId` INT(11) NOT NULL AUTO_INCREMENT ;
 
---new quaries
+--new queries
 alter table medilab.tbl_test_report add column comment varchar(100) default NULL;
 alter table medilab.tbl_test_report add column price decimal(10,2) default 0 not null;
 update tbl_test_report ttr inner join tbl_test tt on tt.testId=ttr.testId set ttr.price = tt.price;
