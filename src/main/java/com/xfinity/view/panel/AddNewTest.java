@@ -11,6 +11,7 @@ import com.xfinity.data_access_object.Test;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -30,6 +31,16 @@ public class AddNewTest extends javax.swing.JPanel {
         tblResults.putClientProperty("terminateEditOnFocusLost", Boolean.TRUE);
         tblResults.setRowHeight((int) (tblResults.getRowHeight() * 1.5));
         model = (DefaultTableModel) tblResults.getModel();
+
+        DefaultComboBoxModel<Test> cmbTestmodel = (DefaultComboBoxModel<Test>) cmbTest.getModel();
+        cmbTestmodel.removeAllElements();
+        List<Test> availableTests = TestController.getAvailableTests();
+        Test defaultTest;
+        (defaultTest = new Test()).setName("");
+        cmbTestmodel.addElement(defaultTest);
+        availableTests.stream().forEach((test) -> {
+            cmbTestmodel.addElement(test);
+        });
     }
 
     /**
@@ -52,6 +63,10 @@ public class AddNewTest extends javax.swing.JPanel {
         txtFooter = new javax.swing.JTextPane();
         btnAddElement = new javax.swing.JButton();
         btnRemoveElement = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        cmbTest = new javax.swing.JComboBox();
+        jLabel3 = new javax.swing.JLabel();
+        txtPrice = new javax.swing.JTextField();
 
         jLabel1.setText("Test Name");
 
@@ -99,6 +114,16 @@ public class AddNewTest extends javax.swing.JPanel {
             }
         });
 
+        jLabel8.setText("Test");
+
+        cmbTest.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbTestItemStateChanged(evt);
+            }
+        });
+
+        jLabel3.setText("Price");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -107,15 +132,6 @@ public class AddNewTest extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane3)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtTestName)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(cmbSpecimen, 0, 123, Short.MAX_VALUE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnSave))
@@ -124,7 +140,26 @@ public class AddNewTest extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnAddElement, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnRemoveElement, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(btnRemoveElement, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtTestName)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(cmbSpecimen, 0, 123, Short.MAX_VALUE)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                                .addComponent(cmbTest, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -133,17 +168,23 @@ public class AddNewTest extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jLabel2))
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtTestName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmbSpecimen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbSpecimen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cmbTest, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnSave))
                     .addGroup(layout.createSequentialGroup()
@@ -157,6 +198,7 @@ public class AddNewTest extends javax.swing.JPanel {
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         Test test = new Test();
+        test.setTestId(((Test) cmbTest.getSelectedItem()).getTestId());
         test.setName(txtTestName.getText());
         test.setSpeciemen(String.format("%S", cmbSpecimen.getSelectedItem().toString()));
         List<Element> elements = new ArrayList<>();
@@ -181,9 +223,14 @@ public class AddNewTest extends javax.swing.JPanel {
             elements.add(e);
         }
         test.setElements(elements);
+        test.setPrice(Double.parseDouble(txtPrice.getText()));
         test.setFooter(txtFooter.getText());
-        boolean addTest = TestController.addTest(test);
-        JOptionPane.showMessageDialog(null, addTest ? "Test Added Successfully" : "Unable to Add Test", null, JOptionPane.INFORMATION_MESSAGE);
+        boolean result = TestController.addTest(test);
+        if (test.getTestId() == 0) {
+            JOptionPane.showMessageDialog(null, result ? "Test Added Successfully" : "Unable to Add Test", null, JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, result ? "Test Updated Successfully" : "Unable to Update Test", null, JOptionPane.INFORMATION_MESSAGE);
+        }
         model.setRowCount(0);
         txtFooter.setText("");
         txtTestName.setText("");
@@ -200,17 +247,45 @@ public class AddNewTest extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnRemoveElementActionPerformed
 
+    private void cmbTestItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbTestItemStateChanged
+        if (evt.getStateChange() == java.awt.event.ItemEvent.SELECTED) {
+            Test selectedTest = (Test) evt.getItem();
+            model.setRowCount(0);
+            for (Element element : selectedTest.getElements()) {
+                Object expectedResults = element.getResults();
+
+                model.addRow(new Object[]{
+                    element.getName(),
+                    expectedResults,
+                    element.getUnit(),
+                    element.getRange(),
+                    element.getElementId(),
+                    expectedResults,
+                    element.isGrouping(),
+                    element.getFloatingPoints()
+                });
+            }
+            txtTestName.setText(selectedTest.getName());
+            txtFooter.setText(selectedTest.getFooter());
+            txtPrice.setText(Double.toString(selectedTest.getPrice()));
+        }
+    }//GEN-LAST:event_cmbTestItemStateChanged
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddElement;
     private javax.swing.JButton btnRemoveElement;
     private javax.swing.JButton btnSave;
     private javax.swing.JComboBox cmbSpecimen;
+    private javax.swing.JComboBox cmbTest;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable tblResults;
     private javax.swing.JTextPane txtFooter;
+    private javax.swing.JTextField txtPrice;
     private javax.swing.JTextField txtTestName;
     // End of variables declaration//GEN-END:variables
 }

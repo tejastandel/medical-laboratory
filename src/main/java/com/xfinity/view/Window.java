@@ -8,8 +8,9 @@ import com.xfinity.view.panel.DoctorRefarals;
 import com.xfinity.view.panel.PrintReceipt;
 import com.xfinity.view.panel.ReportHistory;
 import java.awt.GraphicsEnvironment;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.awt.Image;
+import java.awt.Toolkit;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -24,6 +25,8 @@ public class Window extends javax.swing.JFrame {
         initComponents();
         setSize(GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds().getSize());
         jScrollPane1.getViewport().add(new AddTestResult());
+        Image image = new ImageIcon("./icon.png").getImage();
+        this.setIconImage(image);
     }
 
     /**
@@ -156,7 +159,7 @@ public class Window extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-       jScrollPane1.getViewport().removeAll();
+        jScrollPane1.getViewport().removeAll();
         jScrollPane1.getViewport().add(new ReportHistory());
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
@@ -170,7 +173,7 @@ public class Window extends javax.swing.JFrame {
             javax.swing.UIManager.setLookAndFeel(new SeaGlassLookAndFeel());
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Window.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } 
+        }
         //</editor-fold>
 
         /* Create and display the form */

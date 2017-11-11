@@ -65,6 +65,7 @@ task copyReports(type: Copy) {
         into "output"
         include "reports/*.jrxml"
         include "application-properties.conf"
+	include "icon.png"
     }
 }
 

@@ -25,7 +25,7 @@ public class TestDataAccessLayer {
                 int indexTestId = testData.findColumn("testId");
                 int indexTestName = testData.findColumn("testName");
                 int indexFooter = testData.findColumn("footer");
-                int indexSpeciemen = testData.findColumn("speciemen");               
+                int indexSpeciemen = testData.findColumn("speciemen");
                 int indexPrice = testData.findColumn("price");
 
                 Test test;
@@ -72,15 +72,21 @@ public class TestDataAccessLayer {
     public boolean addTest(Test test) {
         try (Connection connection = DbConnectionProvider.getDbConnection()) {
             try {
-                connection.setAutoCommit(false);
-                String insertTestSql = "insert into tbl_test (testName, speciemen, footer, isActive) values (?,?,?,?)";
-                int testId = DBHandler.setData(connection, insertTestSql, test.getName(), test.getSpeciemen(), test.getFooter(), "Y");
-                String insertTestDetailsSql = "insert into tbl_test_element (testId, testElementName, unit, `range`, results, grouping, floatingPoints) values (?,?,?,?,?,?,?)";
-                for (Element element : test.getElements()) {
-                    DBHandler.setData(connection, insertTestDetailsSql, testId, element.getName(), element.getUnit(), element.getRange(), element.getResults(), "false", element.getFloatingPoints());
+                if (test.getTestId() != 0) {
+                    String updateSql = "update tbl_test set footer=? and price=? where testId=?";
+                    DBHandler.setData(connection, updateSql, test.getFooter(), test.getPrice(), test.getTestId());
+                    return true;
+                } else {
+                    connection.setAutoCommit(false);
+                    String insertTestSql = "insert into tbl_test (testName, speciemen, footer, isActive, price) values (?,?,?,?,?)";
+                    int testId = DBHandler.setData(connection, insertTestSql, test.getName(), test.getSpeciemen(), test.getFooter(), "Y", test.getPrice());
+                    String insertTestDetailsSql = "insert into tbl_test_element (testId, testElementName, unit, `range`, results, grouping, floatingPoints) values (?,?,?,?,?,?,?)";
+                    for (Element element : test.getElements()) {
+                        DBHandler.setData(connection, insertTestDetailsSql, testId, element.getName(), element.getUnit(), element.getRange(), element.getResults(), "false", element.getFloatingPoints());
+                    }
+                    connection.commit();
+                    return testId > 0;
                 }
-                connection.commit();
-                return testId > 0;
             } catch (Exception ex) {
                 connection.rollback();
                 throw ex;

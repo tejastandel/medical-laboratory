@@ -2,3 +2,4 @@ build/
 output/
 reports/*.rpt
 .gradle/
+/.nb-gradle/
